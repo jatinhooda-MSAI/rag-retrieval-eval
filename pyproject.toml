@@ -1,0 +1,16 @@
+[project]
+name = "rag-retrieval-eval"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "anthropic>=1.11.0",
+    "bm25s>=0.3.13",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "pyarrow>=25.0.1",
+    "pypdfium2>=5.14.0",
+    "pystemmer>=3.1.0",
+    "sentence-transformers>=6.1.0",
+    "tokenizers>=0.23.2",
+]

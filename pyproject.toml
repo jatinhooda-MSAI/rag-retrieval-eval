@@ -9,6 +9,7 @@ dependencies = [
     "numpy>=2.5.3",
     "pandas>=3.0.6",
     "pyarrow>=25.0.1",
+    "pydantic>=2.13.5",
     "pypdfium2>=5.14.0",
     "pystemmer>=3.1.0",
     "sentence-transformers>=6.1.0",

@@ -105,12 +105,12 @@ def main():
     evidence = locate_evidence(questions)
     ev = pd.DataFrame(evidence).drop(columns="positions")
     ev.to_csv("results/evidence.csv", index=False)
-    print(f"{len(ev)} evidence passages, best page offset counts: {ev.best_offset.value_counts().to_dict()}, median token match {ev.match.median():.2f}")
+    print(f"{len(ev)} evidence passages, best page offset counts: {ev.best_offset.value_counts().to_dict()}, token match median {ev.match.median():.2f}, lowest {ev.match.min():.2f}")
     rows, chunkers = [], []
     for strategy in STRATEGIES:
         index = load_index(strategy)
         relevant, gains = label(index.chunks, evidence, len(questions))
-        coverable = np.mean([len(s) > 0 for rel in relevant for s in rel])
+        coverable = float(np.mean([len(s) > 0 for rel in relevant for s in rel]))
         chunkers.append({"chunker": strategy, "chunks": len(index.texts), "mean_tokens": round(index.chunks.n_tokens.mean()), "coverable_evidence": round(coverable, 3)})
         print(chunkers[-1])
         for scope in SCOPES:

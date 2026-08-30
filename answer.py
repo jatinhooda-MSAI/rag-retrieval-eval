@@ -104,10 +104,14 @@ def main():
     index = load_index(args.chunker)
     out = Path(f"results/answers_{args.chunker}_{args.retriever}_{args.scope}.jsonl")
     rows = []
-    for question in load_questions()[:args.limit]:
-        rows.append(answer_and_judge(client, index, question, args.retriever, args.scope))
-        print(f"{rows[-1]['id']}  faithfulness {rows[-1]['faithfulness']}  correct {rows[-1]['correct']}")
-    out.write_text("".join(json.dumps(row) + "\n" for row in rows))
+    with out.open("w") as f:
+        for question in load_questions()[:args.limit]:
+            row = answer_and_judge(client, index, question, args.retriever, args.scope)
+            f.write(json.dumps(row) + "\n")
+            f.flush()
+            rows.append(row)
+            faithfulness = "n/a" if row["faithfulness"] is None else f"{row['faithfulness']:.2f}"
+            print(f"{row['id']}  faithfulness {faithfulness}  correct {row['correct']}")
     scored = [row["faithfulness"] for row in rows if row["faithfulness"] is not None]
     print(f"faithfulness {sum(scored) / len(scored):.3f} over {len(scored)} answers with claims")
     print(f"correctness {sum(row['correct'] for row in rows) / len(rows):.3f} over {len(rows)} answers")

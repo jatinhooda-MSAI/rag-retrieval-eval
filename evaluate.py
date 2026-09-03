@@ -13,7 +13,7 @@ from retrieve import RETRIEVERS, load_index
 
 WORD = re.compile(r"[a-z0-9]+", re.I)
 KS = (1, 5, 10, 20)
-METRICS = [f"recall@{k}" for k in KS] + ["mrr@10", "ndcg@10"]
+METRICS = [f"recall@{k}" for k in KS] + ["mrr@10", "ndcg@10", "filing@10"]
 SCOPES = ("corpus", "doc")
 DISCOUNTS = 1 / np.log2(np.arange(2, 12))
 SURFACE, INK, MUTED = "#fcfcfb", "#0b0b0b", "#52514e"
@@ -110,6 +110,7 @@ def main():
     for strategy in STRATEGIES:
         index = load_index(strategy)
         relevant, gains = label(index.chunks, evidence, len(questions))
+        filings = index.chunks.doc_name.to_numpy()
         coverable = float(np.mean([len(s) > 0 for rel in relevant for s in rel]))
         chunkers.append({"chunker": strategy, "chunks": len(index.texts), "mean_tokens": round(index.chunks.n_tokens.mean()), "coverable_evidence": round(coverable, 3)})
         print(chunkers[-1])
@@ -119,7 +120,7 @@ def main():
                     start = time.perf_counter()
                     ranking = list(retrieve(index, q["question"], q["doc_name"] if scope == "doc" else None))
                     latency = time.perf_counter() - start
-                    rows.append({"chunker": strategy, "retriever": name, "scope": scope, "id": q["financebench_id"], **score(ranking, relevant[qi], gains[qi]), "latency_ms": 1000 * latency})
+                    rows.append({"chunker": strategy, "retriever": name, "scope": scope, "id": q["financebench_id"], **score(ranking, relevant[qi], gains[qi]), "filing@10": np.mean(filings[ranking[:10]] == q["doc_name"]), "latency_ms": 1000 * latency})
                 print(strategy, scope, name, f"recall@10 {np.mean([r['recall@10'] for r in rows[-len(questions):]]):.3f}")
     per_question = pd.DataFrame(rows)
     per_question.round(4).to_csv("results/per_question.csv", index=False)

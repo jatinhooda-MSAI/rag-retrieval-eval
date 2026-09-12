@@ -1,0 +1,5 @@
+chunker,chunks,bm25_build_s,dense_build_s
+fixed256,37348,3.4,345.0
+fixed512,18688,3.3,365.1
+structure,24692,4.5,543.5
+semantic,32022,3.0,515.2

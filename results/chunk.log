@@ -1,0 +1,4 @@
+fixed256    37348 chunks  tokens mean 256  p10 256  p90 256  19s
+fixed512    18688 chunks  tokens mean 511  p10 512  p90 512  19s
+structure   24692 chunks  tokens mean 339  p10 227  p90 398  20s
+semantic    32022 chunks  tokens mean 261  p10 94  p90 393  574s

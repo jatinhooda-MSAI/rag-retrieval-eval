@@ -1,0 +1,70 @@
+189 evidence passages, best page offset counts: {0: 189}, token match median 1.00, lowest 0.68
+{'chunker': 'fixed256', 'chunks': 37348, 'mean_tokens': 256, 'coverable_evidence': 0.762}
+fixed256 corpus bm25 recall@10 0.107
+fixed256 corpus dense recall@10 0.201
+fixed256 corpus hybrid recall@10 0.150
+fixed256 corpus rerank recall@10 0.193
+fixed256 doc bm25 recall@10 0.221
+fixed256 doc dense recall@10 0.284
+fixed256 doc hybrid recall@10 0.251
+fixed256 doc rerank recall@10 0.291
+{'chunker': 'fixed512', 'chunks': 18688, 'mean_tokens': 511, 'coverable_evidence': 0.979}
+fixed512 corpus bm25 recall@10 0.150
+fixed512 corpus dense recall@10 0.276
+fixed512 corpus hybrid recall@10 0.232
+fixed512 corpus rerank recall@10 0.282
+fixed512 doc bm25 recall@10 0.363
+fixed512 doc dense recall@10 0.456
+fixed512 doc hybrid recall@10 0.462
+fixed512 doc rerank recall@10 0.458
+{'chunker': 'structure', 'chunks': 24692, 'mean_tokens': 339, 'coverable_evidence': 0.921}
+structure corpus bm25 recall@10 0.113
+structure corpus dense recall@10 0.237
+structure corpus hybrid recall@10 0.200
+structure corpus rerank recall@10 0.223
+structure doc bm25 recall@10 0.331
+structure doc dense recall@10 0.374
+structure doc hybrid recall@10 0.364
+structure doc rerank recall@10 0.370
+{'chunker': 'semantic', 'chunks': 32022, 'mean_tokens': 261, 'coverable_evidence': 0.931}
+semantic corpus bm25 recall@10 0.110
+semantic corpus dense recall@10 0.273
+semantic corpus hybrid recall@10 0.193
+semantic corpus rerank recall@10 0.250
+semantic doc bm25 recall@10 0.308
+semantic doc dense recall@10 0.431
+semantic doc hybrid recall@10 0.418
+semantic doc rerank recall@10 0.440
+  chunker retriever  scope  recall@1  recall@5  recall@10  recall@20  mrr@10  ndcg@10  filing@10  p50_ms
+ fixed256      bm25 corpus     0.047     0.093      0.107      0.113   0.064    0.068      0.213     2.5
+ fixed256     dense corpus     0.067     0.144      0.201      0.244   0.112    0.139      0.363    20.9
+ fixed256    hybrid corpus     0.053     0.120      0.150      0.207   0.079    0.099      0.295    20.2
+ fixed256    rerank corpus     0.050     0.150      0.193      0.227   0.102    0.119      0.303   323.4
+ fixed256      bm25    doc     0.073     0.160      0.221      0.318   0.113    0.179      1.000     0.3
+ fixed256     dense    doc     0.114     0.231      0.284      0.371   0.183    0.250      1.000    13.8
+ fixed256    hybrid    doc     0.103     0.214      0.251      0.361   0.158    0.242      1.000    17.1
+ fixed256    rerank    doc     0.087     0.230      0.291      0.361   0.164    0.241      1.000   321.5
+ fixed512      bm25 corpus     0.080     0.120      0.150      0.169   0.100    0.099      0.231     1.3
+ fixed512     dense corpus     0.087     0.203      0.276      0.376   0.149    0.160      0.360    14.7
+ fixed512    hybrid corpus     0.087     0.149      0.232      0.352   0.123    0.136      0.306    16.7
+ fixed512    rerank corpus     0.083     0.230      0.282      0.339   0.150    0.156      0.328   549.4
+ fixed512      bm25    doc     0.130     0.290      0.363      0.502   0.202    0.225      1.000     0.3
+ fixed512     dense    doc     0.147     0.357      0.456      0.559   0.267    0.307      1.000    12.9
+ fixed512    hybrid    doc     0.177     0.362      0.462      0.559   0.278    0.310      1.000    13.3
+ fixed512    rerank    doc     0.177     0.330      0.458      0.556   0.268    0.291      1.000   545.1
+structure      bm25 corpus     0.087     0.093      0.113      0.147   0.092    0.087      0.213     1.7
+structure     dense corpus     0.080     0.183      0.237      0.290   0.131    0.151      0.339    15.4
+structure    hybrid corpus     0.080     0.143      0.200      0.287   0.113    0.126      0.292    16.9
+structure    rerank corpus     0.070     0.180      0.223      0.283   0.119    0.139      0.319   502.8
+structure      bm25    doc     0.103     0.243      0.331      0.470   0.169    0.225      1.000     0.2
+structure     dense    doc     0.157     0.263      0.374      0.500   0.236    0.286      1.000    12.6
+structure    hybrid    doc     0.150     0.280      0.364      0.517   0.225    0.281      1.000    12.8
+structure    rerank    doc     0.110     0.290      0.370      0.507   0.207    0.261      1.000   491.2
+ semantic      bm25 corpus     0.047     0.080      0.110      0.123   0.062    0.065      0.197     2.1
+ semantic     dense corpus     0.100     0.190      0.273      0.330   0.153    0.170      0.345    15.9
+ semantic    hybrid corpus     0.047     0.117      0.193      0.283   0.083    0.105      0.271    18.5
+ semantic    rerank corpus     0.077     0.167      0.250      0.343   0.134    0.156      0.311   478.2
+ semantic      bm25    doc     0.113     0.227      0.308      0.408   0.167    0.209      1.000     0.3
+ semantic     dense    doc     0.173     0.333      0.431      0.541   0.271    0.305      1.000    13.5
+ semantic    hybrid    doc     0.137     0.297      0.418      0.541   0.222    0.282      1.000    13.4
+ semantic    rerank    doc     0.110     0.340      0.440      0.547   0.226    0.281      1.000   513.9

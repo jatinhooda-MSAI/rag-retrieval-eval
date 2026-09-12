@@ -1,0 +1,4 @@
+{'chunker': 'fixed256', 'chunks': 37348, 'bm25_build_s': 3.4, 'dense_build_s': 345.0}
+{'chunker': 'fixed512', 'chunks': 18688, 'bm25_build_s': 3.3, 'dense_build_s': 365.1}
+{'chunker': 'structure', 'chunks': 24692, 'bm25_build_s': 4.5, 'dense_build_s': 543.5}
+{'chunker': 'semantic', 'chunks': 32022, 'bm25_build_s': 3.0, 'dense_build_s': 515.2}

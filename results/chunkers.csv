@@ -1,0 +1,5 @@
+chunker,chunks,mean_tokens,coverable_evidence
+fixed256,37348,256,0.762
+fixed512,18688,511,0.979
+structure,24692,339,0.921
+semantic,32022,261,0.931

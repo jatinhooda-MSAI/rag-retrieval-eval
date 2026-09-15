@@ -9,7 +9,7 @@ from chunk import STRATEGIES
 from data import load_questions
 from retrieve import RETRIEVERS, load_index
 
-MODEL = "claude-opus-5-5"
+MODEL = "claude-sonnet-5-5"
 
 ANSWER_PROMPT = """Answer the question using only the excerpts from SEC filings below. Show the figures you rely on. If the excerpts do not contain what you need, say so instead of guessing.
 
@@ -59,14 +59,12 @@ class Verdict(BaseModel):
 
 
 def ask(client, prompt, output_format):
-    response = client.beta.messages.parse(
+    response = client.messages.parse(
         model=MODEL,
-        max_tokens=16000,
-        output_config={"effort": "high"},
+        max_tokens=2000,
+        thinking={"type": "between_tools"},
         output_format=output_format,
         messages=[{"role": "user", "content": prompt}],
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
     )
     return response.parsed_output
 

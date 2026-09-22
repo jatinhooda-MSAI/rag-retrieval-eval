@@ -5,7 +5,6 @@ from difflib import SequenceMatcher
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib.colors import LinearSegmentedColormap
 
 from chunk import STRATEGIES, documents
 from data import load_questions
@@ -16,8 +15,6 @@ KS = (1, 5, 10, 20)
 METRICS = [f"recall@{k}" for k in KS] + ["mrr@10", "ndcg@10", "filing@10"]
 SCOPES = ("corpus", "doc")
 DISCOUNTS = 1 / np.log2(np.arange(2, 12))
-SURFACE, INK, MUTED = "#fcfcfb", "#0b0b0b", "#52514e"
-BLUES = LinearSegmentedColormap.from_list("blues", ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"])
 
 
 def locate(text, page_starts, page, evidence):
@@ -79,25 +76,17 @@ def score(ranking, relevant, gains):
 
 
 def heatmap(summary):
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4), facecolor=SURFACE)
-    titles = {"corpus": "Whole corpus", "doc": "Filtered to the question's filing"}
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     for ax, scope in zip(axes, SCOPES):
         grid = summary[summary.scope == scope].pivot(index="chunker", columns="retriever", values="recall@10").loc[STRATEGIES, list(RETRIEVERS)]
-        values = grid.to_numpy()
-        ax.pcolormesh(values, cmap=BLUES, vmin=0, vmax=1, edgecolors=SURFACE, linewidth=2)
-        for (r, c), v in np.ndenumerate(values):
-            ax.text(c + 0.5, r + 0.5, f"{v:.2f}", ha="center", va="center", fontsize=11, color="white" if v > 0.55 else INK)
-        ax.set_xticks(np.arange(values.shape[1]) + 0.5, grid.columns)
-        ax.set_yticks(np.arange(values.shape[0]) + 0.5, grid.index)
-        ax.invert_yaxis()
-        ax.tick_params(length=0, labelcolor=MUTED)
-        ax.set_facecolor(SURFACE)
-        ax.set_title(titles[scope], color=INK, fontsize=11, loc="left")
-        for spine in ax.spines.values():
-            spine.set_visible(False)
-    fig.suptitle("Evidence recall@10 by chunker and retriever", color=INK, fontsize=13, x=0.06, ha="left")
+        ax.imshow(grid, cmap="Blues", vmin=0, vmax=1)
+        for (r, c), v in np.ndenumerate(grid.to_numpy()):
+            ax.text(c, r, f"{v:.2f}", ha="center", va="center")
+        ax.set_xticks(range(grid.shape[1]), grid.columns)
+        ax.set_yticks(range(grid.shape[0]), grid.index)
+        ax.set_title(f"recall@10, {'whole corpus' if scope == 'corpus' else 'question filing only'}")
     fig.tight_layout()
-    fig.savefig("results/heatmap.png", dpi=150, facecolor=SURFACE)
+    fig.savefig("results/heatmap.png", dpi=120)
 
 
 def main():
